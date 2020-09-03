@@ -23,6 +23,7 @@ public class Interactions : MonoBehaviour
             ingredientID = collision.GetComponent<Ingredient>().IngredientID;
             CheckIfTheRightIngredientWasCollected();
             Destroy(collision.gameObject);
+            uiManager.AssignRandomImageToTheBtnIngredient();
         }
     }
 

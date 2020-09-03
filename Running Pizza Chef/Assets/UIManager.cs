@@ -26,4 +26,17 @@ public class UIManager : MonoBehaviour
         ingredientToBePickedID = rand;
         btnIngredient.GetComponent<Image>().sprite = gameManager.ingredients[rand];
     }
+
+    public void AssignNextIngredient()
+    {
+        if(ingredientToBePickedID < gameManager.ingredients.Length - 1)
+        {
+            ingredientToBePickedID++;
+        }
+        else
+        {
+            ingredientToBePickedID = 0;
+        }
+        btnIngredient.GetComponent<Image>().sprite = gameManager.ingredients[ingredientToBePickedID];
+    }
 }
