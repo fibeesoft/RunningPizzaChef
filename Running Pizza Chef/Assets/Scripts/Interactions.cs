@@ -5,10 +5,12 @@ using UnityEngine;
 public class Interactions : MonoBehaviour
 {
     UIManager uiManager;
+    Points points;
     int ingredientID;
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        points = FindObjectOfType<Points>();
     }
 
     void Update()
@@ -31,11 +33,11 @@ public class Interactions : MonoBehaviour
     {
         if(uiManager.IngredientToBePickedID == ingredientID)
         {
-            print("ok");
+            points.AddPoints(1);
         }
         else
         {
-            print("nok");
+            points.TakePoints(2);
         }
     }
 }
