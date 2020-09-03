@@ -7,6 +7,9 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] Button btnIngredient;
+
+    int ingredientToBePickedID;
+    public int IngredientToBePickedID { get { return ingredientToBePickedID; } }
     void Start()
     {
         AssignRandomImageToTheBtnIngredient();
@@ -20,6 +23,7 @@ public class UIManager : MonoBehaviour
     public void AssignRandomImageToTheBtnIngredient()
     {
         int rand = Random.Range(0, gameManager.ingredients.Length);
+        ingredientToBePickedID = rand;
         btnIngredient.GetComponent<Image>().sprite = gameManager.ingredients[rand];
     }
 }
