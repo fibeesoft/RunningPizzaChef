@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
-    [SerializeField] Button btnIngredient;
+    [SerializeField] Image imgIngredient;
+    MovePlayer movePlayerScript;
 
     int ingredientToBePickedID;
     public int IngredientToBePickedID { get { return ingredientToBePickedID; } }
     void Start()
     {
+        movePlayerScript = FindObjectOfType<MovePlayer>();
         AssignRandomImageToTheBtnIngredient();
     }
 
@@ -24,7 +26,7 @@ public class UIManager : MonoBehaviour
     {
         int rand = Random.Range(0, gameManager.ingredients.Length);
         ingredientToBePickedID = rand;
-        btnIngredient.GetComponent<Image>().sprite = gameManager.ingredients[rand];
+        imgIngredient.sprite = gameManager.ingredients[rand];
     }
 
     public void AssignNextIngredient()
@@ -37,6 +39,11 @@ public class UIManager : MonoBehaviour
         {
             ingredientToBePickedID = 0;
         }
-        btnIngredient.GetComponent<Image>().sprite = gameManager.ingredients[ingredientToBePickedID];
+        imgIngredient.sprite = gameManager.ingredients[ingredientToBePickedID];
+    }
+
+    public void TurnJumpingOn()
+    {
+        movePlayerScript.TurnJumpingOn();
     }
 }

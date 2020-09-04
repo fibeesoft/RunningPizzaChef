@@ -46,6 +46,11 @@ public class MovePlayer : MonoBehaviour
 
     }
 
+    public void TurnJumpingOn()
+    {
+        canJump = true;
+    }
+
     void Jump()
     {
         if (canJump && isGrounded)
