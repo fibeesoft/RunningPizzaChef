@@ -6,9 +6,11 @@ public class Interactions : MonoBehaviour
 {
     UIManager uiManager;
     Points points;
+    GameManager gameManager;
     int ingredientID;
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         uiManager = FindObjectOfType<UIManager>();
         points = FindObjectOfType<Points>();
     }
@@ -27,6 +29,11 @@ public class Interactions : MonoBehaviour
             collision.GetComponent<Ingredient>().SwitchCollectAnimation();
             uiManager.AssignRandomImageToTheBtnIngredient();
 
+        }
+
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            gameManager.GameOver();
         }
     }
 

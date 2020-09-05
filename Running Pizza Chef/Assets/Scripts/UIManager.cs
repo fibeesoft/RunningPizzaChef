@@ -7,14 +7,20 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] GameManager gameManager;
     [SerializeField] Image imgIngredient;
+    [SerializeField] Text txtHighScore;
     MovePlayer movePlayerScript;
-
+    Points points;
     int ingredientToBePickedID;
     public int IngredientToBePickedID { get { return ingredientToBePickedID; } }
     void Start()
     {
+        points = FindObjectOfType<Points>();
         movePlayerScript = FindObjectOfType<MovePlayer>();
         AssignRandomImageToTheBtnIngredient();
+        if (points)
+        {
+            txtHighScore.text = points.GetHighScore().ToString();
+        }
     }
 
     void Update()

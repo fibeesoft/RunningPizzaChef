@@ -84,7 +84,7 @@ public class MovePlayer : MonoBehaviour
 
     void CheckIfGrounded()
     {
-        if(Physics2D.OverlapCircle(groundChecker.position,0.2f, layerGround.value))
+        if(Physics2D.OverlapCircle(groundChecker.position, 0.6f, layerGround.value))
         {
             isGrounded = true;
         }

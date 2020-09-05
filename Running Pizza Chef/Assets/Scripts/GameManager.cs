@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
 {
     
     public Sprite[] ingredients;
+    Points points;
     void Start()
     {
-        
+        points = FindObjectOfType<Points>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (points)
+        {
+            points.SaveHighScore();
+        }
+
         SwitchScene(0);
     }
 
