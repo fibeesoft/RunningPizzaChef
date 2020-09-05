@@ -13,9 +13,10 @@ public class Ingredient : MonoBehaviour
         AssignRandomIDAndImage();
     }
 
-    void Update()
+    private void OnEnable()
     {
-        
+        gameManager = FindObjectOfType<GameManager>();
+        AssignRandomIDAndImage();
     }
 
     void AssignRandomIDAndImage()
