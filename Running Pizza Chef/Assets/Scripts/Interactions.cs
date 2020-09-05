@@ -24,8 +24,9 @@ public class Interactions : MonoBehaviour
         {
             ingredientID = collision.GetComponent<Ingredient>().IngredientID;
             CheckIfTheRightIngredientWasCollected();
-            collision.gameObject.SetActive(false);
+            collision.GetComponent<Ingredient>().SwitchCollectAnimation();
             uiManager.AssignRandomImageToTheBtnIngredient();
+
         }
     }
 
