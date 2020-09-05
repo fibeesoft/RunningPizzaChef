@@ -6,6 +6,8 @@ public class MovePlayer : MonoBehaviour
 {
     [SerializeField] Transform groundChecker;
     [SerializeField] LayerMask layerGround;
+
+    Animator anim;
     Rigidbody2D rb;
     Vector2 movePos;
     float speedX = 10f;
@@ -16,11 +18,21 @@ public class MovePlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         jumpForce = new Vector2(0f, 2000f);
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         CheckInput();
+
+        if(Mathf.Abs(rb.velocity.y) < 0.1f)
+        {
+            SwitchAnimation("Run");
+        }
+        else
+        {
+            SwitchAnimation("Jump");
+        }
     }
 
     private void FixedUpdate()
@@ -46,6 +58,11 @@ public class MovePlayer : MonoBehaviour
 
     }
 
+    void SwitchAnimation(string trigger)
+    {
+        anim.SetTrigger(trigger);
+    }
+
     public void TurnJumpingOn()
     {
         canJump = true;
@@ -55,14 +72,19 @@ public class MovePlayer : MonoBehaviour
     {
         if (canJump && isGrounded)
         {
+            
             rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            canJump = false;
+        }
+        else
+        {
             canJump = false;
         }
     }
 
     void CheckIfGrounded()
     {
-        if(Physics2D.OverlapCircle(groundChecker.position,1f, layerGround.value))
+        if(Physics2D.OverlapCircle(groundChecker.position,0.2f, layerGround.value))
         {
             isGrounded = true;
         }
