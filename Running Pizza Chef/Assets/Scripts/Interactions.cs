@@ -8,6 +8,7 @@ public class Interactions : MonoBehaviour
     Points points;
     GameManager gameManager;
     int ingredientID;
+    bool isStarSelected = false;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -27,19 +28,41 @@ public class Interactions : MonoBehaviour
             ingredientID = collision.GetComponent<Ingredient>().IngredientID;
             CheckIfTheRightIngredientWasCollected();
             collision.GetComponent<Ingredient>().SwitchCollectAnimation();
-            uiManager.AssignRandomImageToTheBtnIngredient();
+            if (!isStarSelected)
+            {
+                uiManager.AssignRandomImageToTheBtnIngredient();
+            }
 
         }
-
-        if (collision.transform.CompareTag("Enemy"))
+        else if (collision.transform.CompareTag("Enemy"))
         {
             gameManager.GameOver();
+        }
+
+        else if (collision.transform.CompareTag("Star"))
+        {
+            TurnStarOn();
+            collision.transform.position = new Vector3(0f, 30f, 0f);
+        }
+    }
+
+    void TurnStarOn()
+    {
+        isStarSelected = true;
+        uiManager.AssignStarImage();
+        StartCoroutine(TurnStar());
+
+        IEnumerator TurnStar()
+        {
+            yield return new WaitForSeconds(10f);
+            isStarSelected = false;
+            uiManager.AssignRandomImageToTheBtnIngredient();
         }
     }
 
     void CheckIfTheRightIngredientWasCollected()
     {
-        if(uiManager.IngredientToBePickedID == ingredientID)
+        if(uiManager.IngredientToBePickedID == ingredientID || isStarSelected)
         {
             points.AddPoints(1);
         }

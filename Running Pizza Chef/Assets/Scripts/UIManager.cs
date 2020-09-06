@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] Image imgIngredient;
     [SerializeField] Text txtHighScore;
+    [SerializeField] Sprite spriteStar;
+
     MovePlayer movePlayerScript;
     Points points;
     int ingredientToBePickedID;
@@ -26,6 +28,11 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AssignStarImage()
+    {
+        imgIngredient.sprite = spriteStar;
     }
 
     public void AssignRandomImageToTheBtnIngredient()

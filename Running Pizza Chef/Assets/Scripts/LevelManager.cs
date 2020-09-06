@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     Vector3 shiftX = new Vector3(40f,0f,0f);
 
     [SerializeField] GameObject[] levelPanels;
+    [SerializeField] GameObject star;
     GameObject currentLevelPanel;
     GameObject nextLevelPanel;
     Vector3 currentLevelPanelPos;
@@ -29,8 +30,16 @@ public class LevelManager : MonoBehaviour
         currentLevelPanel = levelPanels[0];
         currentLevelPanel.transform.position = Vector3.zero;
         currentLevelPanelIndex = 0;
+
+        InvokeRepeating("PositionStarOnTheScene", 5f, 10f);
     }
 
+    void PositionStarOnTheScene()
+    {
+        float rand = Random.Range(-3.8f, 4.2f);
+        Vector3 shiftStarPos = new Vector3(10f, rand, 0f);
+        star.transform.position = player.transform.position + shiftStarPos;
+    }
 
     void SwitchNextLevelPanel()
     {
