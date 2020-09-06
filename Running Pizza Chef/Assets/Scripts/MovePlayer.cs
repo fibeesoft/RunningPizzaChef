@@ -71,8 +71,9 @@ public class MovePlayer : MonoBehaviour
 
     void CheckInput()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        movePos.x = x * speedX;
+        //float x = Input.GetAxisRaw("Horizontal");
+        //movePos.x = x * speedX;
+        movePos.x = speedX;
         if (Input.GetButtonDown("Jump"))
         {
             canJump = true;
