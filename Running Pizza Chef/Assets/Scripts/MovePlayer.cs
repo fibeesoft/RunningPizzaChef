@@ -6,6 +6,8 @@ public class MovePlayer : MonoBehaviour
 {
     [SerializeField] Transform groundChecker;
     [SerializeField] LayerMask layerGround;
+    [SerializeField] AudioClip[] audioclips;
+    AudioSource audios;
 
     Animator anim;
     Rigidbody2D rb;
@@ -14,20 +16,40 @@ public class MovePlayer : MonoBehaviour
     Vector2 jumpForce;
     bool canJump = false;
     bool isGrounded;
+
+
     void Start()
     {
+        audios = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         jumpForce = new Vector2(0f, 2000f);
         anim = GetComponent<Animator>();
     }
 
+    void PlayRunningAudio()
+    {
+        if (!audios.isPlaying)
+        {
+            audios.clip = audioclips[0];
+            audios.Play();
+        }
+    }
+
+    void PlayJumpAudio()
+    {
+        audios.Stop();
+        audios.PlayOneShot(audioclips[1]);
+    }
+
+
     void Update()
     {
         CheckInput();
 
-        if(Mathf.Abs(rb.velocity.y) < 0.1f)
+        if(Mathf.Abs(rb.velocity.y) < 0.05f)
         {
             SwitchAnimation("Run");
+            PlayRunningAudio();
         }
         else
         {
@@ -74,6 +96,7 @@ public class MovePlayer : MonoBehaviour
         {
             
             rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            PlayJumpAudio();
             canJump = false;
         }
         else
