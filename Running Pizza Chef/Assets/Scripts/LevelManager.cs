@@ -31,14 +31,14 @@ public class LevelManager : MonoBehaviour
         currentLevelPanel.transform.position = Vector3.zero;
         currentLevelPanelIndex = 0;
 
-        InvokeRepeating("PositionStarOnTheScene", 5f, 10f);
+        InvokeRepeating("PositionStarOnTheScene", 5f, 12f);
     }
 
     void PositionStarOnTheScene()
     {
         float rand = Random.Range(-3.8f, 4.2f);
-        Vector3 shiftStarPos = new Vector3(10f, rand, 0f);
-        star.transform.position = player.transform.position + shiftStarPos;
+        Vector3 shiftStarPos = new Vector3(12f, rand, 0f);
+        star.transform.position = new Vector3(player.transform.position.x + shiftStarPos.x, rand, 0f);
     }
 
     void SwitchNextLevelPanel()

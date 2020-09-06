@@ -28,6 +28,7 @@ public class Interactions : MonoBehaviour
             ingredientID = collision.GetComponent<Ingredient>().IngredientID;
             CheckIfTheRightIngredientWasCollected();
             collision.GetComponent<Ingredient>().SwitchCollectAnimation();
+            gameManager.PlayPopSound();
             if (!isStarSelected)
             {
                 uiManager.AssignRandomImageToTheBtnIngredient();
@@ -49,6 +50,7 @@ public class Interactions : MonoBehaviour
     void TurnStarOn()
     {
         isStarSelected = true;
+        uiManager.MakeButtonInteractive(false);
         uiManager.AssignStarImage();
         StartCoroutine(TurnStar());
 
@@ -57,6 +59,7 @@ public class Interactions : MonoBehaviour
             yield return new WaitForSeconds(10f);
             isStarSelected = false;
             uiManager.AssignRandomImageToTheBtnIngredient();
+            uiManager.MakeButtonInteractive(true);
         }
     }
 

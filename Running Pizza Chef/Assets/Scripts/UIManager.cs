@@ -33,6 +33,12 @@ public class UIManager : MonoBehaviour
     public void AssignStarImage()
     {
         imgIngredient.sprite = spriteStar;
+       
+    }
+
+    public void MakeButtonInteractive(bool isInteractive)
+    {
+        imgIngredient.transform.GetComponentInParent<Button>().interactable = isInteractive;
     }
 
     public void AssignRandomImageToTheBtnIngredient()

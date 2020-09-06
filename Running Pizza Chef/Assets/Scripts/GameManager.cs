@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    
+    AudioSource audios;
     public Sprite[] ingredients;
     Points points;
     void Start()
     {
+        audios = GetComponent<AudioSource>();
         points = FindObjectOfType<Points>();
     }
 
@@ -17,6 +18,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlayPopSound()
+    {
+        audios.Play();
     }
 
     public void GameOver()
